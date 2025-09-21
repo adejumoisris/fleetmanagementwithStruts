@@ -1,0 +1,471 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f0f2f5;
+    color: #333;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.logo-text {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #004466;
+    padding: 0 20px;
+}
+
+.navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.navbar li {
+    position: relative;
+}
+
+.navbar a {
+    display: block;
+    padding: 12px 15px;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.navbar a:hover {
+    background-color: #006699;
+}
+
+.navbar .user-info {
+    margin-left: auto;
+    color: white;
+    font-size: 13px;
+    padding: 12px 15px;
+}
+
+.navbar .user-info a {
+    color: #ffd700;
+    text-decoration: underline;
+    padding: 0;
+    margin-left: 5px;
+}
+
+.navbar .user-info a:hover {
+    background-color: transparent;
+}
+
+.navbar .home-icon {
+    margin-left: 15px;
+}
+
+/* Dropdowns hidden by default */
+.dropdown-menu,
+.dropdown-submenu {
+    display: none;
+    position: absolute;
+    background: #004466;
+    min-width: 200px;
+    z-index: 1000;
+    border: 1px solid #00334d;
+    border-radius: 4px;
+    padding: 0;
+}
+
+.dropdown-submenu {
+    top: 0;
+    left: 100%;
+}
+
+/* Show when toggled by JS */
+.show {
+    display: block !important;
+}
+
+/* Links inside dropdowns */
+.dropdown-menu a,
+.dropdown-submenu a {
+    color: #fff;
+    padding: 10px 15px;
+    display: block;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.dropdown-menu a:hover,
+.dropdown-submenu a:hover {
+    background: #006699;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+    background-color: #e9ecef;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #555;
+    border-left: 5px solid #007bff;
+}
+
+/* Main content */
+.main-content {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+/* Tabs */
+.tabs {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+    display: flex;
+}
+
+.tab-button {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-bottom: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    margin-right: 5px;
+    color: #007bff;
+}
+
+.tab-button.active {
+    background-color: #fff;
+    border-color: #ddd;
+    border-bottom: 1px solid #fff;
+    color: #333;
+    font-weight: bold;
+}
+
+.tab-pane {
+    display: none;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+/* Form layout */
+.form-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px 30px;
+    padding: 10px 0;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2px;
+}
+
+.form-row.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-row label {
+    flex-basis: 120px;
+    min-width: 80px;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: right;
+    padding-right: 10px;
+    white-space: nowrap;
+}
+
+.form-row input[type="text"],
+.form-row input[type="time"],
+.form-row select,
+.form-row textarea {
+    flex-grow: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    max-width: 250px;
+}
+
+.form-row input[type="text"][readonly] {
+    background-color: #e9ecef;
+}
+
+.form-row textarea {
+    min-height: 60px;
+    resize: vertical;
+    max-width: 100%;
+
+}
+
+.form-row #mileage-date {
+    flex-basis: 120px;
+    max-width: 120px;
+}
+
+.form-row #mileage-time {
+    flex-basis: 80px;
+    max-width: 80px;
+}
+
+.icon-button {
+    background: #e9ecef;
+    border: 1px solid #ccc;
+    padding: 5px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 30px;
+}
+
+/* Form actions */
+.form-actions {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.submit-button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.submit-button:hover {
+    background-color: #218838;
+}
+
+.action-link {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.action-link:hover {
+    text-decoration: underline;
+}
+
+.compulsory-fields {
+    color: #dc3545;
+    font-size: 13px;
+    margin-left: auto;
+}
+
+/* Footer */
+.footer {
+    background-color: #f8f9fa;
+    padding: 15px 20px;
+    margin-top: 20px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: #666;
+}
+
+.footer a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+.footer .version {
+    font-weight: bold;
+}
+
+/* Past Maintenance */
+.filter-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #ccc;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+.filter-section label {
+    font-weight: bold;
+}
+
+.filter-section select,
+.filter-section input,
+.filter-section button {
+    padding: 4px 6px;
+    font-size: 14px;
+}
+
+.filter-btn,
+.clear-btn,
+.refresh-btn {
+    background: #f5f5f5;
+    border: 1px solid #999;
+    cursor: pointer;
+}
+
+.filter-btn:hover,
+.clear-btn:hover,
+.refresh-btn:hover {
+    background: #ddd;
+}
+
+.refresh-btn {
+    margin-left: auto; /* push Refresh to the right */
+}
+
+.results-box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    min-height: 100px;
+}
+
+.no-result {
+    color: red;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .navbar ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .navbar li {
+        flex: 1 1 auto;
+        text-align: center;
+    }
+
+    .navbar .user-info,
+    .navbar .home-icon {
+        margin-left: 0;
+        flex: 1 1 100%;
+        text-align: center;
+    }
+
+    .form-section {
+        grid-template-columns: 1fr;
+    }
+
+    .form-row label {
+        flex-basis: 100%;
+        text-align: left;
+        padding-right: 0;
+        margin-bottom: 5px;
+    }
+
+    .form-row input,
+    .form-row select,
+    .form-row textarea {
+        max-width: 100%;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .compulsory-fields {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .navbar a {
+        padding: 10px 8px;
+        font-size: 12px;
+    }
+}
+/* Comments Section (fixed below status) */
+.status-section {
+    margin-bottom: 15px;
+    grid-column: 1 / -1; /* full width for status too */
+}
+
+.comments-section {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 10px;
+    background: #fff;
+    width: 100%;
+    clear: both;
+    display: block;
+    grid-column: 1 / -1; /* spans both columns on desktop */
+}
+
+/* Header with expand button */
+.comments-header {
+    background: #f8f9fa;
+    padding: 10px 15px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 14px;
+    border-bottom: 1px solid #ddd;
+}
+
+.comments-header:hover {
+    background: #e9ecef;
+}
+
+/* Expand/Collapse icon */
+.expand-icon {
+    font-size: 14px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.expand-icon.open {
+    transform: rotate(90deg);
+}
+
+/* Body hidden by default */
+.comments-body {
+    display: none;
+    padding: 15px;
+}
+.selected-names {
+    margin-top: 10px;
+    font-weight: bold;
+    color: darkblue;
+}

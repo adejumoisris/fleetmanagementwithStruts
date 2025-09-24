@@ -100,3 +100,45 @@ function showSelected1() {
     // Show names beside input
     display.value = names.join(", ");
 }
+    document.addEventListener("DOMContentLoaded", function () {
+    const tabButtons = document.querySelectorAll(".tab-button");
+    const tabContents = document.querySelectorAll(".tab-content");
+
+    // Handle tab switching
+    tabButtons.forEach(button => {
+    button.addEventListener("click", () => {
+    // Remove active class from all buttons
+    tabButtons.forEach(btn => btn.classList.remove("active"));
+
+    // Add active class to clicked button
+    button.classList.add("active");
+
+    // Hide all tab contents
+    tabContents.forEach(tab => tab.style.display = "none");
+
+    // Get which tab was clicked
+    const tabName = button.getAttribute("data-tab");
+
+    // Show the right tab
+    if (tabName === "files") {
+    document.getElementById("filesTab").style.display = "block";
+} else {
+    document.getElementById(tabName).style.display = "block";
+}
+});
+});
+
+    // Handle file upload message
+    const fileInput = document.getElementById("fileUpload");
+    const messageDiv = fileInput.nextElementSibling; // The "No file found" div
+
+    fileInput.addEventListener("change", function () {
+    if (fileInput.files.length > 0) {
+    messageDiv.style.color = "green";
+    messageDiv.textContent = "File selected: " + fileInput.files[0].name;
+} else {
+    messageDiv.style.color = "red";
+    messageDiv.textContent = "No file found";
+}
+});
+});

@@ -172,6 +172,7 @@
                 <th>Complaint</th>
                 <th>Mainl. No</th>
                 <th>Status</th>
+                <th>Actions</th>
             </tr>
             </thead>
 
@@ -190,6 +191,21 @@
                 <span class="<s:property value="#req.status"/>">
                     <s:property value="#req.status"/>
                 </span>
+                    </td>
+<%--                    Edit and delete table --%>
+<%--                    update --%>
+                    <td>
+                        <s:url var="editUrl" action="editRequest">
+                            <s:param name="id" value="%{#req.id}"/>
+                        </s:url>
+                        <a href="<s:property value='%{editUrl}'/>">Edit</a>
+<%--                        Delete --%>
+
+                        <s:url var="deleteUrl" action="deleteRequest">
+                            <s:param name="id" value="%{#req.id}"/>
+                        </s:url>
+                        <a href="<s:property value='%{deleteUrl}'/>"
+                           onclick="return confirm('Are you sure?');">Delete</a>
                     </td>
                 </tr>
             </s:iterator>

@@ -31,11 +31,33 @@
             <result name="success">/vehicle_maintenance_requests.jsp</result>
         </action>
 
+<!--        Edit actions -->
+        <action name="editRequest" class="action.EditRequestAction">
+            <result>/edit_request.jsp</result>
+        </action>
+
+        <action name="updateRequest" class="action.UpdateRequestAction">
+            <result type="redirect">listMaintenance</result>
+        </action>
+
+<!--        Delete -->
+        <action name="deleteRequest" class="action.DeleteRequestAction">
+            <result name="success" type="redirect">listMaintenance</result>
+        </action>
+
+
+
 
         <!-- Generate Jasper Report -->
-        <action name="generateMaintenanceReport" class="action.MaintenanceReportAction">
+        <action name="generateMaintenanceReport" class="action.MaintainanceReport">
             <result type="stream">
+
                 <param name="contentType">application/pdf</param>
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">inline;filename="report.pdf"</param>
+                <param name="bufferSize">1024</param>
+
+
             </result>
         </action>
 

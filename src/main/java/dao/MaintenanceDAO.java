@@ -35,33 +35,43 @@ public class MaintenanceDAO {
         }
     }
 
+//     Update the requests
+
+    public MaintenanceRecord getById(Long id) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.get(MaintenanceRecord.class, id);
+        }
+    }
+
+    public void update(MaintenanceRecord record) {
+        Transaction tx = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            tx = session.beginTransaction();
+            session.update(record);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+        }
+    }
 
 
+    public void delete(Long id) {
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
 
+            MaintenanceRecord record = session.get(MaintenanceRecord.class, id);
+            if (record != null) {
+                session.delete(record);
+            }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+        }
+    }
 
 
 

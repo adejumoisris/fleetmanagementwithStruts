@@ -9,10 +9,10 @@ public class HibernateUtil {
     private static SessionFactory buildSessionFactory() {
         try {
             return new Configuration().configure().buildSessionFactory();
-        } catch (Throwable ex) {
-            System.err.println("SessionFactory initialization failed!");
+        }catch (Throwable ex) {
+            System.err.println("SessionFactory initialization failed: " + ex.getMessage());
             ex.printStackTrace();
-            throw new ExceptionInInitializerError("Initial SessionFactory creation failed." + ex);
+            throw new ExceptionInInitializerError(ex);
         }
     }
 

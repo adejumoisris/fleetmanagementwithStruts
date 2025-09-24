@@ -20,7 +20,7 @@ public class MaintenanceReportAction extends ActionSupport {
         List<MaintenanceRecord> records = dao.findAll();
 
         String reportPath = ServletActionContext.getServletContext()
-                .getRealPath("/reports/maintenance_report.jasper");
+                .getRealPath("src/main/resources/reports/maintenance_report.jrxml");
 
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(records);
         JasperPrint jasperPrint = JasperFillManager.fillReport(reportPath, null, dataSource);

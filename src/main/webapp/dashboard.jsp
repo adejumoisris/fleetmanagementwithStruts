@@ -53,13 +53,193 @@
         <!-- Tabs -->
         <div class="tabs">
             <button class="tab-button active" data-tab="details">DETAILS</button>
-<%--            <a href="files.jsp">--%>
             <button class="tab-button" data-tab="files">FILES</button>
-<%--                </a>--%>
             <button class="tab-button" data-tab="past">PAST MAINTENANCE(S)</button>
             <button class="tab-button" data-tab="history">HISTORY</button>
         </div>
+
+        <!-- Tab content areas -->
+        <div class="tab-content" id="details">
+            <!-- details content -->
+        </div>
+
+        <!-- FILES TAB -->
+        <div class="tab-content" id="filesTab" style="display:none; border:1px solid #ccc; padding:10px;">
+            <form id="filesForm" enctype="multipart/form-data">
+                <label for="fileUpload">
+                    Attach File
+                    <img src="paperclip_icon.png" alt="Attach" style="width:16px; vertical-align:middle;" />
+                </label>
+                <br/>
+                <input type="file" id="fileUpload" name="fileUpload" multiple />
+
+                <div id="fileMessage" style="margin-top:10px; color:red; font-size:14px;">
+                    No file found
+                </div>
+
+                <!-- Success/Error -->
+                <div id="filesFeedback" style="margin-top:10px; font-size:14px;"></div>
+
+                <div style="margin-top:15px;">
+                    <button type="submit">Submit</button>
+                    <button type="button" style="background-color:green; color:white; margin-left:10px;">
+                        Create Maintenance
+                    </button>
+                    <span style="color:red; margin-left:10px;">* Compulsory fields</span>
+                </div>
+            </form>
+        </div>
+
+        <!-- PAST MAINTENANCE(S) -->
+        <div class="tab-content" id="past" style="display:none; border:1px solid #ccc; padding:10px;">
+            <form id="pastForm">
+                <div style="margin-bottom:10px;">
+                    <label for="date">Date</label>
+                    <input type="date" id="date" name="date" />
+
+                    <label for="operator" style="margin-left:15px;">Operator</label>
+                    <select id="operator" name="operator">
+                        <option value="">--Select Operator--</option>
+                        <option>Operator 1</option>
+                        <option>Operator 2</option>
+                    </select>
+
+                    <label for="itemType" style="margin-left:15px;">Item Type</label>
+                    <select id="itemType" name="itemType">
+                        <option value="">--Select Type--</option>
+                        <option>Type 1</option>
+                        <option>Type 2</option>
+                    </select>
+
+                    <button type="button" id="filterBtn" style="margin-left:10px;">Filter</button>
+                    <button type="button" id="clearBtn" style="margin-left:5px;">Clear</button>
+                    <button type="button" id="refreshBtn" style="margin-left:5px;">Refresh</button>
+                </div>
+
+                <!-- Results table -->
+                <div id="resultsBox" style="border:1px solid #ccc; padding:10px; min-height:100px;">
+                    <strong>Vehicle -</strong>
+                    <p style="color:red; text-align:center; margin-top:20px;">No result to display</p>
+                </div>
+
+                <!-- Success/Error -->
+                <div id="pastFeedback" style="margin-top:10px; font-size:14px;"></div>
+
+                <div style="margin-top:15px;">
+                    <button type="submit">Submit</button>
+                    <button type="button" style="background-color:green; color:white; margin-left:10px;">
+                        Create Maintenance
+                    </button>
+                    <span style="color:red; margin-left:10px;">* Compulsory fields</span>
+                </div>
+            </form>
+        </div>
+
+        <div class="tab-content" id="history" style="display:none;">
+            <!-- history content -->
+        </div>
     </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const tabButtons = document.querySelectorAll(".tab-button");
+            const tabContents = document.querySelectorAll(".tab-content");
+
+            // Tab switching
+            tabButtons.forEach(button => {
+                button.addEventListener("click", () => {
+                    tabButtons.forEach(btn => btn.classList.remove("active"));
+                    button.classList.add("active");
+
+                    tabContents.forEach(tab => tab.style.display = "none");
+
+                    const tabName = button.getAttribute("data-tab");
+                    if (tabName === "files") {
+                        document.getElementById("filesTab").style.display = "block";
+                    } else {
+                        document.getElementById(tabName).style.display = "block";
+                    }
+                });
+            });
+
+            // FILES FORM
+            const fileInput = document.getElementById("fileUpload");
+            const fileMessage = document.getElementById("fileMessage");
+            const filesForm = document.getElementById("filesForm");
+            const filesFeedback = document.getElementById("filesFeedback");
+
+            fileInput.addEventListener("change", function () {
+                if (fileInput.files.length > 0) {
+                    fileMessage.style.color = "green";
+                    let fileList = "Files selected:<br>";
+                    for (let i = 0; i < fileInput.files.length; i++) {
+                        fileList += "- " + fileInput.files[i].name + "<br>";
+                    }
+                    fileMessage.innerHTML = fileList;
+                } else {
+                    fileMessage.style.color = "red";
+                    fileMessage.textContent = "No file found";
+                }
+            });
+
+            filesForm.addEventListener("submit", function (e) {
+                e.preventDefault(); // stop real submit
+                if (fileInput.files.length === 0) {
+                    filesFeedback.style.color = "red";
+                    filesFeedback.textContent = "❌ Please attach at least one file before submitting.";
+                } else {
+                    filesFeedback.style.color = "green";
+                    filesFeedback.textContent = "✅ File(s) submitted successfully!";
+                }
+            });
+
+            // PAST MAINTENANCE(S)
+            const filterBtn = document.getElementById("filterBtn");
+            const clearBtn = document.getElementById("clearBtn");
+            const refreshBtn = document.getElementById("refreshBtn");
+            const resultsBox = document.getElementById("resultsBox");
+            const pastForm = document.getElementById("pastForm");
+            const pastFeedback = document.getElementById("pastFeedback");
+
+            filterBtn.addEventListener("click", () => {
+                resultsBox.innerHTML = `
+            <strong>Vehicle -</strong>
+            <p style="color:green; text-align:center; margin-top:20px;">Filtered results (demo)</p>
+        `;
+            });
+
+            clearBtn.addEventListener("click", () => {
+                pastForm.reset();
+                resultsBox.innerHTML = `
+            <strong>Vehicle -</strong>
+            <p style="color:red; text-align:center; margin-top:20px;">No result to display</p>
+        `;
+            });
+
+            refreshBtn.addEventListener("click", () => {
+                resultsBox.innerHTML = `
+            <strong>Vehicle -</strong>
+            <p style="color:red; text-align:center; margin-top:20px;">No result to display (refreshed)</p>
+        `;
+            });
+
+            pastForm.addEventListener("submit", function (e) {
+                e.preventDefault(); // stop real submit
+                const date = document.getElementById("date").value;
+                const operator = document.getElementById("operator").value;
+                const itemType = document.getElementById("itemType").value;
+
+                if (!date || !operator || !itemType) {
+                    pastFeedback.style.color = "red";
+                    pastFeedback.textContent = "❌ Please fill in all compulsory fields before submitting.";
+                } else {
+                    pastFeedback.style.color = "green";
+                    pastFeedback.textContent = "✅ Maintenance form submitted successfully!";
+                }
+            });
+        });
+    </script>
+
 
         <!-- Tab Content -->
     <div class="tab-content">

@@ -14,6 +14,7 @@ public class EditRequestAction extends ActionSupport {
         if (record == null) {
             return ERROR;
         }
+
         return SUCCESS; // forward to edit JSP
     }
 

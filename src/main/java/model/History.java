@@ -1,0 +1,62 @@
+package model;
+
+import javax.persistence.*;
+import java.util.Date;
+
+@Entity
+@Table(name = "history")
+public class History {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String username;
+    private String action; // e.g. "Created maintenance request", "Updated maintenance request"
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date timestamp;
+
+    public History() {
+    }
+
+    public History(String action, Long id, Date timestamp, String username) {
+        this.action = action;
+        this.id = id;
+        this.timestamp = timestamp;
+        this.username = username;
+    }
+
+    public History(String loggedInUser, String createdANewMaintenanceRequest) {
+    }
+
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Date getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+}

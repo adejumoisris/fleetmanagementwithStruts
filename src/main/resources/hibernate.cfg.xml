@@ -28,6 +28,7 @@
         <mapping class="model.VehicleMaintenanceRequest"/>
         <mapping class="model.MaintenanceComment"/>
         <mapping class="model.MaintenanceRecord"/>
+        <mapping class="model.History"/>
 
     </session-factory>
 </hibernate-configuration>

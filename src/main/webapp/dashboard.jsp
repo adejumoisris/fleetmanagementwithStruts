@@ -55,7 +55,7 @@
             <button class="tab-button active" data-tab="details">DETAILS</button>
             <button class="tab-button" data-tab="files">FILES</button>
             <button class="tab-button" data-tab="past">PAST MAINTENANCE(S)</button>
-            <button class="tab-button" data-tab="history">HISTORY</button>
+           <a href="history.action">  <button class="tab-button" data-tab="history">HISTORY</button> </a>
         </div>
 
         <!-- Tab content areas -->
@@ -349,11 +349,48 @@
                 </div>
 
                 <!-- HISTORY -->
-                <div class="tab-pane" id="history">
-                    <h3>History</h3>
-                    <p>Action logs will appear here.</p>
-                </div>
-                    <div>
+<%--                <div class="tab-pane" id="history">--%>
+<%--                    <h3>History</h3>--%>
+<%--                    <p>Action logs will appear here.</p>--%>
+<%--                </div>--%>
+
+            <!-- HISTORY -->
+            <!-- HISTORY TAB -->
+            <div class="tab-content" id="history" style="display:none; border:1px solid #ccc; padding:10px;">
+                <h3>History</h3>
+                <s:if test="historyList != null && !historyList.isEmpty()">
+                    <table border="1" cellpadding="6" cellspacing="0" style="width:100%; border-collapse:collapse;">
+                        <thead style="background:#f4f4f4;">
+                        <tr>
+                            <th>Date/Time</th>
+                            <th>User</th>
+                            <th>Action</th>
+                            <th>Details</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <s:iterator value="historyList">
+                            <tr>
+                                <td><s:property value="timestamp"/></td>
+                                <td><s:property value="user"/></td>
+                                <td><s:property value="action"/></td>
+                                <td><s:property value="details"/></td>
+                            </tr>
+                        </s:iterator>
+                        </tbody>
+                    </table>
+                </s:if>
+                <s:else>
+                    <p style="color:red; text-align:center; margin-top:20px;">No history available</p>
+                </s:else>
+            </div>
+
+
+
+
+
+
+            <div>
             </div>
 
                 </section>

@@ -44,6 +44,10 @@
         <action name="deleteRequest" class="action.DeleteRequestAction">
             <result name="success" type="redirect">listMaintenance</result>
         </action>
+<!--HISTORY -->
+        <action name="history" class="action.HistoryAction">
+            <result name="success">/history.jsp</result>
+        </action>
 
 
 

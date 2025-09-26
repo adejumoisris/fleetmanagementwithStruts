@@ -1,8 +1,13 @@
 package action;
 
 import com.opensymphony.xwork2.ActionSupport;
+import dao.HistoryDao;
 import dao.MaintenanceDAO;
+import model.History;
 import model.MaintenanceRecord;
+import org.apache.struts2.ServletActionContext;
+
+import java.util.Date;
 
 public class SaveMaintenanceAction extends ActionSupport {
     private String office;
@@ -116,10 +121,25 @@ public class SaveMaintenanceAction extends ActionSupport {
             MaintenanceDAO dao = new MaintenanceDAO();
             dao.save(record);
 
+            // Log History
+
+            History history = new History();
+            history.setUsername(getLoggedInUser());
+            history.setAction("Created a new maintenance request");
+            history.setTimestamp(new Date());
+            new HistoryDao().save(history);
+
             return SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();
+            addActionError("Failed to create maintenance Request");
             return ERROR;
         }
     }
+
+    // Get logged-in user from session
+    private String getLoggedInUser() {
+        return (String) ServletActionContext.getRequest().getSession().getAttribute("username");
+    }
+
 }

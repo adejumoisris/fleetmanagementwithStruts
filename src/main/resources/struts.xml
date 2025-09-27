@@ -49,6 +49,21 @@
             <result name="success">/history.jsp</result>
         </action>
 
+<!--        File submition -->
+
+        <action name="uploadFile" class="action.UploadFileAction">
+            <result name="success">/File.jsp</result>
+            <result name="error">/dashboard.jsp</result>
+        </action>
+
+<!--        View Details -->
+        <action name="viewRequest" class="action.ViewRequestAction">
+            <result name="success">/details.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+
+
+
 
 
 

@@ -11,20 +11,25 @@ public class History {
     private Long id;
     private String username;
     private String action; // e.g. "Created maintenance request", "Updated maintenance request"
+    private String details;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date timestamp;
 
+    // Many histories belong to one maintenance record
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "record_id")
+    private MaintenanceRecord record;
+
     public History() {
     }
 
-    public History(String action, Long id, Date timestamp, String username) {
-        this.action = action;
-        this.id = id;
-        this.timestamp = timestamp;
+    public History(String username, String action, String details) {
         this.username = username;
+        this.action = action;
+        this.details = details;
+        this.timestamp = new Date();
     }
-
     public History(String loggedInUser, String createdANewMaintenanceRequest) {
     }
 
@@ -58,5 +63,17 @@ public class History {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getDetails() {return details;}
+
+    public void setDetails(String details) {this.details = details;}
+
+    public MaintenanceRecord getRecord() {
+        return record;
+    }
+
+    public void setRecord(MaintenanceRecord record) {
+        this.record = record;
     }
 }

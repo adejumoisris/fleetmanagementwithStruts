@@ -8,6 +8,7 @@ import model.MaintenanceRecord;
 import org.apache.struts2.ServletActionContext;
 
 import java.util.Date;
+import java.util.List;
 
 public class SaveMaintenanceAction extends ActionSupport {
     private String office;
@@ -20,6 +21,27 @@ public class SaveMaintenanceAction extends ActionSupport {
     private String faultType;
     private String complaint;
     private String status;
+
+//    List of drop down
+
+    private List<String> offices;
+    private List<String> clients;
+
+    public List<String> getClients() {
+        return clients;
+    }
+
+    public void setClients(List<String> clients) {
+        this.clients = clients;
+    }
+
+    public List<String> getOffices() {
+        return offices;
+    }
+
+    public void setOffices(List<String> offices) {
+        this.offices = offices;
+    }
 
     public String getClient() {
         return client;
@@ -125,7 +147,8 @@ public class SaveMaintenanceAction extends ActionSupport {
 
             History history = new History();
             history.setUsername(getLoggedInUser());
-            history.setAction("Created a new maintenance request");
+            history.setAction("new maintenance request");
+            history.setDetails("created a new maintenance request");
             history.setTimestamp(new Date());
             new HistoryDao().save(history);
 

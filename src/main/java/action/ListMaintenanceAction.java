@@ -14,6 +14,10 @@ public class ListMaintenanceAction extends ActionSupport {
         return requests;
     }
 
+    public void setRequests(List<MaintenanceRecord> requests) {
+        this.requests = requests;
+    }
+
     @Override
     public String execute() {
         MaintenanceDAO dao = new MaintenanceDAO();

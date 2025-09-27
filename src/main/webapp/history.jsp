@@ -38,6 +38,7 @@
       <th>ID</th>
       <th>User</th>
       <th>Action</th>
+      <th>Details</th>
       <th>Timestamp</th>
     </tr>
     <s:iterator value="histories">
@@ -45,6 +46,7 @@
         <td><s:property value="id" /></td>
         <td><s:property value="username" /></td>
         <td><s:property value="action" /></td>
+        <td><s:property value="details"/></td>
         <td><s:property value="timestamp" /></td>
       </tr>
     </s:iterator>

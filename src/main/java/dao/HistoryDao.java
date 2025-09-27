@@ -23,4 +23,17 @@ public class HistoryDao {
         return list;
     }
 
+    public List<History> getByRequestId(Long requestId) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.createQuery(
+                            "FROM model.History h WHERE h.record.id = :reqId ORDER BY h.timestamp DESC\n",
+                            History.class
+                    )
+                    .setParameter("reqId", requestId)
+                    .list();
+        }
+    }
+
+
+
 }

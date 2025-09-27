@@ -91,11 +91,11 @@
 <div class="container">
     <h2>Edit Maintenance Record</h2>
 
-    <s:form action="updateRequest" method="post">
+    <s:form action="updateRequest" method="post" enctype="multipart/form-data">
         <s:hidden name="record.id"/>
 
         <div class="form-row">
-            <s:textfield name="record.office" label="Office"/>
+            <s:select name="record.office" list="{'Ibadan','Lagos','Port Harcourt', 'Kano', 'Abuja', 'Enugu'}" label="Office"/>
         </div>
         <div class="form-row">
             <s:textfield name="record.client" label="Client"/>
@@ -123,6 +123,15 @@
         </div>
         <div class="form-row">
             <s:select name="record.status" list="{'Pending','Started','Complete'}" label="Status"/>
+        </div>
+
+        <div>
+            <!-- File upload -->
+            <s:file name="fileUpload"  id="fileUpload" multiple="true"  label="Attach File"/>
+
+            <!-- Success/Error messages -->
+            <s:actionmessage cssStyle="color:green; margin-top:10px;"/>
+            <s:actionerror cssStyle="color:red; margin-top:10px;"/>
         </div>
 
         <s:submit cssClass="btn-submit" value="Save Changes"/>

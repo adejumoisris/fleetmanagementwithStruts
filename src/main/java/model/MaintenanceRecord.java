@@ -1,6 +1,8 @@
 package model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="maintenance_records")
@@ -19,6 +21,40 @@ public class MaintenanceRecord {
     private String faultType;
     private String complaint;
     private String status;
+
+    @OneToMany(mappedBy = "record", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<FileEntity> files = new ArrayList<>();
+
+    // --- History ---
+    @OneToMany(mappedBy = "record", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<History> histories = new ArrayList<>();
+
+    public void addFile(FileEntity file) {
+        files.add(file);
+        file.setRecord(this);
+    }
+
+    public void addHistory(History history) {
+        histories.add(history);
+        history.setRecord(this);
+    }
+
+
+    public List<FileEntity> getFiles() {
+        return files;
+    }
+
+    public void setFiles(List<FileEntity> files) {
+        this.files = files;
+    }
+
+    public List<History> getHistories() {
+        return histories;
+    }
+
+    public void setHistories(List<History> histories) {
+        this.histories = histories;
+    }
 
     public String getClient() {
         return client;

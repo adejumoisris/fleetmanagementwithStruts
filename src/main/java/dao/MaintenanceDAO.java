@@ -73,6 +73,19 @@ public class MaintenanceDAO {
         }
     }
 
+    public List<MaintenanceRecord> getByVehicle(String vehicle, Long excludeId) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.createQuery(
+                            "FROM MaintenanceRecord WHERE vehicle = :vehicle AND id != :id ORDER BY mileageDate DESC",
+                            MaintenanceRecord.class
+                    )
+                    .setParameter("vehicle", vehicle)
+                    .setParameter("id", excludeId)
+                    .list();
+        }
+    }
+
+
 
 
 }

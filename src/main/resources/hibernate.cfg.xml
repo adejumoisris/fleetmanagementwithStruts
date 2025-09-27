@@ -29,6 +29,10 @@
         <mapping class="model.MaintenanceComment"/>
         <mapping class="model.MaintenanceRecord"/>
         <mapping class="model.History"/>
+        <mapping class="model.FileEntity"/>
+
+
+
 
     </session-factory>
 </hibernate-configuration>

@@ -199,13 +199,13 @@
                             <s:param name="id" value="%{#req.id}"/>
                         </s:url>
                         <a href="<s:property value='%{editUrl}'/>">Edit</a>
-<%--                        Delete --%>
+<%--                        Details  --%>
 
-                        <s:url var="deleteUrl" action="deleteRequest">
+                        <s:url var="detailsUrl" action="viewRequest">
                             <s:param name="id" value="%{#req.id}"/>
                         </s:url>
-                        <a href="<s:property value='%{deleteUrl}'/>"
-                           onclick="return confirm('Are you sure?');">Delete</a>
+                        <a href="<s:property value='%{detailsUrl}'/>">Details</a>
+
                     </td>
                 </tr>
             </s:iterator>

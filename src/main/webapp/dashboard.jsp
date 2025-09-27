@@ -64,31 +64,36 @@
         </div>
 
         <!-- FILES TAB -->
+        <!-- FILES TAB -->
         <div class="tab-content" id="filesTab" style="display:none; border:1px solid #ccc; padding:10px;">
-            <form id="filesForm" enctype="multipart/form-data">
+
+            <!-- Use Struts2 form -->
+            <s:form action="uploadFile" method="post" enctype="multipart/form-data" id="filesForm">
                 <label for="fileUpload">
                     Attach File
                     <img src="paperclip_icon.png" alt="Attach" style="width:16px; vertical-align:middle;" />
                 </label>
                 <br/>
-                <input type="file" id="fileUpload" name="fileUpload" multiple />
+                <s:file name="fileUpload" id="fileUpload" label="Choose File"  multiple="true"  />
 
                 <div id="fileMessage" style="margin-top:10px; color:red; font-size:14px;">
                     No file found
                 </div>
 
-                <!-- Success/Error -->
-                <div id="filesFeedback" style="margin-top:10px; font-size:14px;"></div>
+                <!-- Success/Error from Action -->
+                <s:actionmessage cssStyle="color:green; margin-top:10px;"/>
+                <s:actionerror cssStyle="color:red; margin-top:10px;"/>
 
                 <div style="margin-top:15px;">
-                    <button type="submit">Submit</button>
-                    <button type="button" style="background-color:green; color:white; margin-left:10px;">
-                        Create Maintenance
-                    </button>
-                    <span style="color:red; margin-left:10px;">* Compulsory fields</span>
+                    <s:submit value="Submit"/>
+<%--                    <button type="button" style="background-color:green; color:white; margin-left:10px;">--%>
+<%--                        Create Maintenance--%>
+<%--                    </button>--%>
+<%--                    <span style="color:red; margin-left:10px;">* Compulsory fields</span>--%>
                 </div>
-            </form>
+            </s:form>
         </div>
+
 
         <!-- PAST MAINTENANCE(S) -->
         <div class="tab-content" id="past" style="display:none; border:1px solid #ccc; padding:10px;">
@@ -183,7 +188,7 @@
             });
 
             filesForm.addEventListener("submit", function (e) {
-                e.preventDefault(); // stop real submit
+                 // stop real submit
                 if (fileInput.files.length === 0) {
                     filesFeedback.style.color = "red";
                     filesFeedback.textContent = "❌ Please attach at least one file before submitting.";
